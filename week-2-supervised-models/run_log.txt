@@ -1,0 +1,57 @@
+======================================================================
+PART 0 - DATA PREPARATION (reusing the Week 1 preprocessing)
+======================================================================
+Dataset after preparation: 891 rows x 18 columns
+Missing values: 0
+Classification features: 16 | Regression features: 16
+
+======================================================================
+PART 1 - CLASSIFICATION (target: Survived)
+======================================================================
+Train/test split: 712 train / 179 test (stratified)
+Class balance (train): 38.3% survived
+
+Classification results (test set):
+                     CV accuracy (train)  Accuracy  Precision  Recall     F1  ROC-AUC
+Logistic Regression                0.824     0.849      0.828   0.768  0.797    0.876
+Decision Tree                      0.815     0.832      0.810   0.739  0.773    0.843
+Random Forest                      0.806     0.799      0.746   0.725  0.735    0.823
+K-Nearest Neighbors                0.767     0.771      0.769   0.580  0.661    0.799
+
+Best classifier by F1: Logistic Regression
+
+======================================================================
+PART 2 - REGRESSION (target: Fare, pounds)
+======================================================================
+Train/test split: 712 train / 179 test
+Fare (target): mean £32.20, median £14.45, max £512.33
+Note: fare is heavily right-skewed, so models train on log1p(fare);
+      predictions are converted back to pounds before evaluation.
+
+Regression results (test set, pounds):
+                       MAE   RMSE    R2
+Linear Regression    10.88  25.40  0.58
+Random Forest        11.77  28.64  0.47
+K-Nearest Neighbors  14.16  33.84  0.26
+
+Best regressor by R-squared: Linear Regression
+
+======================================================================
+PART 3 - MODEL INTERPRETATION
+======================================================================
+Top feature importances (Random Forest classifier):
+Fare          0.245
+Age           0.209
+Title_Mr      0.128
+Sex           0.123
+Pclass        0.071
+FamilySize    0.048
+Title_Miss    0.033
+SibSp         0.031
+
+Decision Tree depth: 5 (max_depth=5 to limit overfitting)
+Random Forest train vs test accuracy: 0.985 vs 0.799
+
+======================================================================
+ALL MODELS TRAINED AND COMPARED - COMPLETE
+======================================================================
