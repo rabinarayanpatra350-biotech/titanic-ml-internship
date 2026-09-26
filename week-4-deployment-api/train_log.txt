@@ -1,0 +1,38 @@
+======================================================================
+STEP 1 - LOAD AND PREPARE THE DATA
+======================================================================
+Prepared dataset: 891 rows x 16 features
+
+======================================================================
+STEP 2 - TRAIN AND EVALUATE THE MODEL
+======================================================================
+Test-set performance of the deployed model:
+  Accuracy   0.849
+  Precision  0.828
+  Recall     0.768
+  F1         0.797
+  ROC-AUC    0.876
+
+Strongest model coefficients:
+Title_Mr       -1.336
+Sex            -1.289
+Pclass         -1.140
+Title_Rare     -0.647
+IsAlone        -0.346
+Title_Miss      0.072
+Embarked_Q      0.276
+Fare            0.485
+Title_Mrs       0.719
+Title_Master    1.204
+
+======================================================================
+STEP 3 - REFIT AND SERIALIZE (joblib)
+======================================================================
+Serialized -> model.pkl
+Bundle contents: model, fare_scaler, feature list (16 features), metrics
+Serialized model size: 2.2 KB
+Round-trip verification (load pickle, compare predictions): PASS
+
+======================================================================
+MODEL READY FOR DEPLOYMENT - run 'python app.py' to serve it
+======================================================================

@@ -1,0 +1,101 @@
+======================================================================
+TEST 1 - GET /health
+======================================================================
+HTTP 200
+{
+  "model": "LogisticRegression (scikit-learn)",
+  "status": "healthy",
+  "test_metrics": {
+    "Accuracy": 0.849,
+    "F1": 0.797,
+    "Precision": 0.828,
+    "ROC-AUC": 0.876,
+    "Recall": 0.768
+  },
+  "trained_on": "titanic.csv (891 passengers)"
+}
+
+======================================================================
+TEST 2 - GET / (documentation endpoint)
+======================================================================
+HTTP 200
+Service : Titanic Survival Prediction API
+Endpoints: GET /health, POST /predict
+
+======================================================================
+TEST 3 - POST /predict (three passengers)
+======================================================================
+
+3rd-class man, 22, cheap ticket ('Jack')
+HTTP 200
+{
+  "input": {
+    "age": 22,
+    "embarked": "S",
+    "fare": 7.25,
+    "parch": 0,
+    "pclass": 3,
+    "sex": "male",
+    "sibsp": 1,
+    "title": "Mr"
+  },
+  "model": "LogisticRegression (scikit-learn)",
+  "survival_prediction": 0,
+  "survival_probability": 0.076,
+  "verdict": "does not survive"
+}
+
+1st-class woman, 38, expensive ticket ('Rose')
+HTTP 200
+{
+  "input": {
+    "age": 38,
+    "embarked": "C",
+    "fare": 71.28,
+    "parch": 0,
+    "pclass": 1,
+    "sex": "female",
+    "sibsp": 1,
+    "title": "Mrs"
+  },
+  "model": "LogisticRegression (scikit-learn)",
+  "survival_prediction": 1,
+  "survival_probability": 0.96,
+  "verdict": "survives"
+}
+
+7-year-old boy travelling with family ('Master')
+HTTP 200
+{
+  "input": {
+    "age": 7,
+    "embarked": "S",
+    "fare": 21.08,
+    "parch": 2,
+    "pclass": 3,
+    "sex": "male",
+    "sibsp": 1,
+    "title": "Master"
+  },
+  "model": "LogisticRegression (scikit-learn)",
+  "survival_prediction": 1,
+  "survival_probability": 0.553,
+  "verdict": "survives"
+}
+
+======================================================================
+TEST 4 - POST /predict with invalid body (must return 400)
+======================================================================
+HTTP 400 (expected 400)
+{
+  "error": "provide JSON with at least 'pclass', 'sex', 'age'; see GET / for a full example"
+}
+
+======================================================================
+SUMMARY
+======================================================================
+  [200] 3rd-class man, 22, cheap ticket ('Jack')             -> prediction 0 (p=0.076)
+  [200] 1st-class woman, 38, expensive ticket ('Rose')       -> prediction 1 (p=0.96)
+  [200] 7-year-old boy travelling with family ('Master')     -> prediction 1 (p=0.553)
+Invalid-input handling: PASS
+ALL API TESTS PASSED

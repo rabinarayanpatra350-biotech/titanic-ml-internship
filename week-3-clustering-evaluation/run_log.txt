@@ -1,0 +1,77 @@
+======================================================================
+PART 0 - DATA PREPARATION (reusing the Week 1 preprocessing)
+======================================================================
+Dataset after preparation: 891 rows x 18 columns
+Missing values: 0
+
+======================================================================
+PART A1 - K-MEANS CLUSTERING
+======================================================================
+Features for clustering: 16 (Survived excluded)
+Features standardized with StandardScaler before clustering.
+
+ k | inertia   | silhouette
+ 2 |     11444 | 0.286
+ 3 |      9824 | 0.307
+ 4 |      8633 | 0.349
+ 5 |      7603 | 0.377
+ 6 |      6724 | 0.366
+ 7 |      5949 | 0.400
+ 8 |      5299 | 0.417
+ 9 |      4916 | 0.379
+10 |      4550 | 0.379
+
+Optimal k by silhouette score: 8 (silhouette = 0.417)
+
+======================================================================
+PART A2 - PCA DIMENSIONALITY REDUCTION
+======================================================================
+PC1 explains 24.9%, PC2 explains 15.6% (together 40.5% of the variance)
+
+======================================================================
+PART A3 - CLUSTER PROFILING
+======================================================================
+         passengers  mean_age  mean_fare  pct_female  pct_first_class  survival_rate
+Cluster                                                                            
+0               116     34.68      46.85        1.00             0.37           0.84
+1                85     32.31      50.68        0.00             0.44           0.25
+2               386     31.51      18.20        0.00             0.18           0.15
+3                70     25.33      11.06        0.50             0.01           0.43
+4                23     45.30      37.17        0.13             0.65           0.35
+5               129     23.26      46.47        1.00             0.33           0.76
+6                40      6.62      34.70        0.00             0.08           0.57
+7                42     22.10      69.39        0.74             0.14           0.19
+
+Saved -> cluster_profiles.csv
+(Survival was NOT shown to the clustering algorithm - it is used
+  here only to check what the clusters mean a posteriori.)
+
+======================================================================
+PART A4 - HIERARCHICAL CLUSTERING
+======================================================================
+Agglomerative (Ward) clustering with k=8
+Agreement with K-Means (adjusted Rand index): 0.870
+
+======================================================================
+PART B - MODEL EVALUATION & HYPERPARAMETER TUNING
+======================================================================
+Train/test split: 712 train / 179 test (stratified)
+
+Baseline random forest (Week 2 settings), test set:
+Baseline RF                  0.799  0.746  0.725  0.735  0.823
+
+Grid search: 16 parameter combinations x 5 folds = 80 fits
+Best parameters: {'max_depth': 4, 'min_samples_leaf': 1, 'n_estimators': 200}
+Best cross-validated F1 (train folds): 0.772
+Tuned RF                     0.821  0.794  0.725  0.758  0.854
+
+Model evaluation comparison (test set):
+                        Accuracy  Precision  Recall     F1  ROC-AUC
+Baseline RF (Week 2)       0.799      0.746   0.725  0.735    0.823
+Tuned RF (grid search)     0.821      0.794   0.725  0.758    0.854
+
+Saved -> tuning_results.csv
+
+======================================================================
+CLUSTERING AND MODEL EVALUATION COMPLETE
+======================================================================
