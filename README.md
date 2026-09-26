@@ -14,6 +14,28 @@ with the exact code that was run, its real run log, and its requirements.
 | 3 — Unsupervised & evaluation | [`week-3-clustering-evaluation/`](week-3-clustering-evaluation/) | K-Means (elbow + silhouette), Ward hierarchical clustering, PCA, cluster profiling, GridSearchCV tuning | Best k=8 (silhouette 0.417); clusters rediscover "women and children first"; tuned RF 82.1% |
 | 4 — Deployment (capstone) | [`week-4-deployment-api/`](week-4-deployment-api/) | Model serialization with **joblib** + **Flask prediction API** with health check, validation, and automated tests | Live API: 2.2 KB model.pkl served over HTTP; all endpoint tests pass |
 
+## Results gallery
+
+**Week 1 — exploratory analysis of the raw data** (survival by sex and class, age and fare distributions):
+
+![Week 1 EDA](https://github.com/rabinarayanpatra350-biotech/titanic-data-preprocessing/releases/download/v1.0/fig2_eda.png)
+
+**Week 2 — four classifiers compared on the held-out test set** (logistic regression wins on every metric):
+
+![Week 2 classification metrics](https://github.com/rabinarayanpatra350-biotech/titanic-supervised-models/releases/download/v1.0/fig1_cls_metrics.png)
+
+**Week 3 — K-Means clusters visualized in PCA space** (structure discovered without ever seeing the survival label):
+
+![Week 3 PCA clusters](https://github.com/rabinarayanpatra350-biotech/titanic-clustering-evaluation/releases/download/v1.0/fig2_pca_clusters.png)
+
+**Week 4 — the deployed system**: offline training pipeline producing `model.pkl`, served online by a Flask API:
+
+![Week 4 architecture](https://github.com/rabinarayanpatra350-biotech/titanic-ml-api/releases/download/v1.0/fig_architecture.png)
+
+**Week 4 — the API in action** (a real request and response):
+
+![Week 4 API demo](https://github.com/rabinarayanpatra350-biotech/titanic-ml-api/releases/download/v1.0/fig_api_demo.png)
+
 ## How the weeks connect
 
 Week 1 produces the cleaned feature set → Week 2 picks the best model on it → Week 3
@@ -60,8 +82,8 @@ live because the submission links point to them):
 ## Release archive
 
 The [v1.0 release](https://github.com/rabinarayanpatra350-biotech/titanic-ml-internship/releases/tag/v1.0)
-contains the full internship archive in one download: all four written reports (PDF),
-the capstone presentation, the serialized model, the datasets, and every results table.
+contains the full internship archive in one download: the four written reports, the
+capstone presentation, the serialized model, the datasets, and the results tables.
 
 ## Tech stack
 
