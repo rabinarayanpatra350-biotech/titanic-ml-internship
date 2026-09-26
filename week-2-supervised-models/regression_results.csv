@@ -1,0 +1,4 @@
+,MAE,RMSE,R2
+Linear Regression,10.88,25.4,0.58
+Random Forest,11.77,28.64,0.47
+K-Nearest Neighbors,14.16,33.84,0.26

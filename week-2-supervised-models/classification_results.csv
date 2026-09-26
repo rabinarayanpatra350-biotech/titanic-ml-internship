@@ -1,0 +1,5 @@
+,CV accuracy (train),Accuracy,Precision,Recall,F1,ROC-AUC
+Logistic Regression,0.824,0.849,0.828,0.768,0.797,0.876
+Decision Tree,0.815,0.832,0.81,0.739,0.773,0.843
+Random Forest,0.806,0.799,0.746,0.725,0.735,0.823
+K-Nearest Neighbors,0.767,0.771,0.769,0.58,0.661,0.799
